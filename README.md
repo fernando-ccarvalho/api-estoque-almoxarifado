@@ -52,3 +52,8 @@ app/
 ## Como Executar Localmente
 
 > Em construção — instruções serão adicionadas ao final do Incremento 1.
+
+# OBSERVAÇÕES
+  - Adicionar uma função na criação de lotes para editar as informações que foram recusadas, após a verificação de dados repetidos dentro do próprio lote e da verificação de o dado existe dentro do banco de dados.
+
+
