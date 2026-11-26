@@ -129,3 +129,33 @@ def inativar(material_id: int):
                 (material_id,),
             )
             return cur.fetchone()
+
+
+def buscar_por_id_com_trava(con, material_id: int):
+    with con.cursor(row_factory=dict_row) as cur:
+        cur.execute(
+            """
+            SELECT
+                id, sku, nome, categoria_id, unidade_medida,
+                saldo_atual, estoque_minimo, ativo, criado_em
+            FROM materiais
+            WHERE id = %s
+            FOR UPDATE;
+            """,
+            (material_id,),
+        )
+        return cur.fetchone()
+
+
+def atualizar_saldo(con, material_id: int, variacao: int):
+    with con.cursor(row_factory=dict_row) as cur:
+        cur.execute(
+            """
+            UPDATE materiais
+            SET saldo_atual = saldo_atual + %s
+            WHERE id = %s
+            RETURNING id, saldo_atual;
+            """,
+            (variacao, material_id),
+        )
+        return cur.fetchone()
