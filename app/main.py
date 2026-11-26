@@ -4,6 +4,8 @@ from fastapi.responses import JSONResponse
 from app.exceptions import AppError
 from app.routers import categoria_router, material_router
 
+from app.routers import categoria_router, material_router, movimentacao_router
+
 app = FastAPI(
     title="API Estoque Almoxarifado",
     version="1.0.0",
@@ -25,3 +27,7 @@ def health_check():
 
 app.include_router(categoria_router.router)
 app.include_router(material_router.router)
+
+app.include_router(categoria_router.router)
+app.include_router(material_router.router)
+app.include_router(movimentacao_router.router)

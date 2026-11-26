@@ -71,3 +71,17 @@ def buscar_por_id(movimentacao_id: int):
                 (movimentacao_id,),
             )
             return cur.fetchone()     
+
+def buscar_por_id(movimentacao_id: int):             
+    with conectar() as con:                          
+        with con.cursor(row_factory=dict_row) as cur:
+            cur.execute(                             
+                """
+                SELECT
+                    id, material_id, tipo, quantidade, observacao, data_movimentacao
+                FROM movimentacoes
+                WHERE id = %s;
+                """,
+                (movimentacao_id,),                      
+            )
+            return cur.fetchone()                       
